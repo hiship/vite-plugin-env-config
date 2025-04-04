@@ -5,10 +5,14 @@ A Vite plugin to generate config.js from .env file
 ### Install
 
 ```shell
-npm install vite-env-config
+npm install vite-env-config -D
+# or
+yarn add vite-env-config -D
+# or
+pnpm install vite-env-config -D
 ```
 
-### Use config
+### Use
 Assuming you have two env configuration files for the development environment and the build environment
 
 .env.development
@@ -24,7 +28,7 @@ VITE_BASE_URL = https://domain.com
 VITE_MODE = production
 ```
 
-Use in vite.config.js
+Configuration plugin in vite.config.js
 ```js
 import viteEnvConfig from 'vite-env-config'
 
@@ -41,4 +45,9 @@ window.config = {BASE_API:'https://domain.com'}
 Please use it in the following way in the code:
 ```js
 let baseUrl = import.meta.env.MODE === 'production' ? window.config.BASE_API : import.meta.env.VITE_BASE_API;
+//axios config
+const instance = axios.create({
+  baseURL: baseUrl,
+  timeout: 1000,
+});
 ```
